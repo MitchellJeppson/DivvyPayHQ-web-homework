@@ -101,4 +101,25 @@ defmodule Homework.Users do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+
+  @doc """
+  Fuzzy search of users first name using levenshtein's fuzzy search algorithm.
+  """
+  def fuzzy_search(first_name, last_name, threshold) do
+    query = from u in User,
+                 where:
+                   fragment(
+                     "levenshtein(?, ?)",
+                     u.first_name,
+                     ^first_name
+                   ) <= ^threshold and
+                   fragment(
+                     "levenshtein(?, ?)",
+                     u.last_name,
+                     ^last_name
+                   ) <= ^threshold
+
+    Repo.all(query)
+  end
 end

@@ -20,6 +20,13 @@ defmodule HomeworkWeb.Schema do
       resolve(&UsersResolver.users/3)
     end
 
+    @desc "Fuzzy search Users"
+    field(:fuzzy_search, list_of(:user)) do
+      arg :first_name, non_null(:string)
+      arg :last_name, non_null(:string)
+      resolve(&UsersResolver.fuzzy_search/3)
+    end
+
     @desc "Get all Merchants"
     field(:merchants, list_of(:merchant)) do
       resolve(&MerchantsResolver.merchants/3)

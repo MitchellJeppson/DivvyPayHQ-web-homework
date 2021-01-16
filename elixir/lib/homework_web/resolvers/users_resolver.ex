@@ -50,4 +50,12 @@ defmodule HomeworkWeb.Resolvers.UsersResolver do
         {:error, "could not update user: #{inspect(error)}"}
     end
   end
+
+
+  @doc """
+  Lists a user based on fuzzy search of first name
+  """
+  def fuzzy_search(_root, %{first_name: first_name, last_name: last_name}, _info) do
+    {:ok, Users.fuzzy_search(first_name, last_name, 2)}
+  end
 end
