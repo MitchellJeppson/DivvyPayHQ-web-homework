@@ -22,6 +22,20 @@ defmodule Homework.Transactions do
   end
 
   @doc """
+  Returns a list of transactions between max and min
+
+    ## Examples
+
+        iex> list_transactions_between(10, 5)
+        [%Transaction{}, ...]
+  """
+  def list_transactions_between(max, min) do
+    query = from t in Transaction,
+                 where: t.amount <= ^max and t.amount >= ^min
+    Repo.all(query)
+  end
+
+  @doc """
   Gets a single transaction.
 
   Raises `Ecto.NoResultsError` if the Transaction does not exist.

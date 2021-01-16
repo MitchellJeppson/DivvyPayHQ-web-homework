@@ -105,6 +105,11 @@ defmodule Homework.Users do
 
   @doc """
   Fuzzy search of users first name using levenshtein's fuzzy search algorithm.
+
+  ## Examples
+
+      iex> fuzzy_search("mitxg", "jeppsim", 2)
+      %User{}
   """
   def fuzzy_search(first_name, last_name, threshold) do
     query = from u in User,
