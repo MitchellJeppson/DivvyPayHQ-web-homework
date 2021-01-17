@@ -28,12 +28,9 @@ defmodule HomeworkWeb.Resolvers.CompaniesResolver do
   def update_company(_root, %{id: id} = args, _info) do
     company = Companies.get_company!(id)
 
-    IO.puts "MJEPPSON:: "
-    IO.inspect args
-
     case Companies.update_company(company, args) do
       {:ok, company} ->
-        {:ok, company}
+        update_company_available_credit(company, id)
 
       error ->
         {:error, "could not update company: #{inspect(error)}"}
@@ -52,6 +49,20 @@ defmodule HomeworkWeb.Resolvers.CompaniesResolver do
 
       error ->
         {:error, "could not update company: #{inspect(error)}"}
+    end
+  end
+
+  @doc """
+  Internal method to update company available credit on changes to transactions
+  """
+  def update_company_available_credit(object, id) do
+    case Companies.update_available_credit(id) do
+      {:ok, company} ->
+        # I'm sure there is a way to determine if the 'object' is of type company, that would be cleaner
+        object = Map.put(object, :available_credit, company.available_credit)
+        {:ok, object}
+      error ->
+        {:error, "could not update company available credit #{inspect(error)}"}
     end
   end
 end

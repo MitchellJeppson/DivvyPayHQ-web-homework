@@ -122,8 +122,6 @@ defmodule Homework.Companies do
         {:error, "query result was malformed"}
       [used_credit] ->
 
-        IO.puts "MJEPPSON\n"
-        IO.puts used_credit
         used_credit = if !used_credit do
           0
         else
@@ -132,12 +130,7 @@ defmodule Homework.Companies do
 
         company = get_company!(id)
 
-        IO.puts company.credit_line
-        IO.puts used_credit
-
         new_available_credit = company.credit_line - used_credit
-
-        IO.puts new_available_credit
 
         args = %{
           credit_line: company.credit_line,
