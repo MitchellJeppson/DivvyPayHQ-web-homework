@@ -34,8 +34,8 @@ defmodule Homework.MerchantsTest do
 
     test "create_merchant/1 with valid data creates a merchant" do
       assert {:ok, %Merchant{} = merchant} = Merchants.create_merchant(@valid_attrs)
-      assert merchant.description == "some description"
-      assert merchant.name == "some name"
+      assert merchant.description == @valid_attrs.description
+      assert merchant.name == @valid_attrs.name
     end
 
     test "create_merchant/1 with invalid data returns error changeset" do
@@ -45,8 +45,8 @@ defmodule Homework.MerchantsTest do
     test "update_merchant/2 with valid data updates the merchant" do
       merchant = merchant_fixture()
       assert {:ok, %Merchant{} = merchant} = Merchants.update_merchant(merchant, @update_attrs)
-      assert merchant.description == "some updated description"
-      assert merchant.name == "some updated name"
+      assert merchant.description == @update_attrs.description
+      assert merchant.name == @update_attrs.name
     end
 
     test "update_merchant/2 with invalid data returns error changeset" do

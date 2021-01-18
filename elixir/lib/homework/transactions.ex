@@ -22,7 +22,7 @@ defmodule Homework.Transactions do
   end
 
   @doc """
-  Returns a list of transactions between max and min
+  Returns a list of transactions max <= and >= min
 
     ## Examples
 

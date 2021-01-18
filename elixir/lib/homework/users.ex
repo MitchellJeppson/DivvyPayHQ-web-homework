@@ -109,7 +109,7 @@ defmodule Homework.Users do
   ## Examples
 
       iex> fuzzy_search("mitxg", "jeppsim", 2)
-      %User{}
+      [%User{}]
   """
   def fuzzy_search(first_name, last_name, threshold) do
     query = from u in User,
