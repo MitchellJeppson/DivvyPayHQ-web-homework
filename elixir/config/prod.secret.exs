@@ -12,7 +12,7 @@ database_url =
     """
 
 config :homework, Homework.Repo,
-  # ssl: true,
+  ssl: true, # seems like this should be true for prod, may need additional configuration for https
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
